@@ -1,4 +1,4 @@
-# FullStack POS System Node.js & React
+# FullStack Renting System Node.js & NEXT.js
 ![dp]()
 
 ### Built With
