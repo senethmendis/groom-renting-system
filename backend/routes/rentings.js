@@ -16,4 +16,25 @@ router.get("/", (req, res) => {
   }
 });
 
+router.post("/", (req, res) => {
+  const query =
+    "INSERT INTO `rentings` (`customer_name`, `customer_number`, `customer_nic`, `rented_date`, `return_date`, `product_name`, `product_code`, `note`,`renting_price`,`customer_address`) VALUES (?)";
+  const values = [
+    req.body.name,
+    req.body.number,
+    req.body.nic,
+    req.body.rentedDate,
+    req.body.returnDate,
+    req.body.productName,
+    req.body.productCode,
+    req.body.notes,
+    req.body.price,
+    req.body.address,
+  ];
+  db.query(query, [values], (err, data) => {
+    if (err) throw err;
+    return res.json("New Rent Added!");
+  });
+});
+
 module.exports = router;

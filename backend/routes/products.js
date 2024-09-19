@@ -16,4 +16,22 @@ router.get("/", (req, res) => {
   }
 });
 
+router.delete("/:id", (req, res) => {
+  try {
+    const id = req.params.id;
+    const query = "DELETE FROM products WHERE product_id=?";
+    db.query(query, [id], (err, data) => {
+      if (err) throw err;
+      if (data.affectedRows === 0) {
+        return res.status(404).json({ messafe: "Product Not Found!" });
+      }
+
+      return res.status(200).json({ message: "Product Deleted!" });
+    });
+  } catch (error) {
+    console.error("Fetching prodcut data failed!", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 module.exports = router;
