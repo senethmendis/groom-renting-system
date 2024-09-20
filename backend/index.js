@@ -1,10 +1,9 @@
 const express = require("express");
 const cors = require("cors");
-const app = express();
 const dotenv = require("dotenv");
+const app = express();
 
 //routers
-
 dotenv.config();
 app.use(express.json());
 app.use(cors());
@@ -17,7 +16,7 @@ app.use("/products", products);
 app.use("/rentings", rentings);
 
 // test route
-app.get("/", (req, res) => {
+app.get("/helloworld", (req, res) => {
   res.send("Hello World");
 });
 

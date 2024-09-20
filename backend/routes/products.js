@@ -29,7 +29,7 @@ router.delete("/:id", (req, res) => {
       return res.status(200).json({ message: "Product Deleted!" });
     });
   } catch (error) {
-    console.error("Fetching prodcut data failed!", error);
+    console.error("Deleting Renting data failed!", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });

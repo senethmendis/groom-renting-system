@@ -37,4 +37,22 @@ router.post("/", (req, res) => {
   });
 });
 
+router.delete("/:id", (req, res) => {
+  try {
+    const id = req.params.id;
+    const query = "DELETE FROM rentings WHERE renting_id=?";
+    db.query(query, [id], (err, data) => {
+      if (err) throw err;
+      if (data.affectedRows === 0) {
+        return res.status(404).json({ messafe: "Renting Not Found!" });
+      }
+
+      return res.status(200).json({ message: "Renting Deleted!" });
+    });
+  } catch (error) {
+    console.error("Deleting Renting data failed!", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 module.exports = router;
