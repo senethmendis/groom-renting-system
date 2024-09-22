@@ -8,12 +8,14 @@ dotenv.config();
 app.use(express.json());
 app.use(cors());
 
+const port = process.env.SERVERPORT;
 const products = require("./routes/products");
 const rentings = require("./routes/rentings");
-const port = process.env.SERVERPORT;
+const dashboard = require("./routes/dashboard");
 
 app.use("/products", products);
 app.use("/rentings", rentings);
+app.use("/dashboard", dashboard);
 
 // test route
 app.get("/helloworld", (req, res) => {

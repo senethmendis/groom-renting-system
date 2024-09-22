@@ -1,6 +1,9 @@
-import dotenv from "dotenv";
+import Countings from "@/components/Countings";
 
-dotenv.config();
 export default function Home() {
-  return <main>test Dash</main>;
+  return (
+    <div>
+      <Countings />
+    </div>
+  );
 }
