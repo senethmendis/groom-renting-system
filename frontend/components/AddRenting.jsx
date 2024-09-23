@@ -13,6 +13,7 @@ import {
 import axios from "axios";
 import { Loader2 } from "lucide-react";
 import { Separator } from "@radix-ui/react-dropdown-menu";
+import { toast } from "sonner";
 
 const AddRenting = ({ refetchData }) => {
   const today = new Date().toJSON().slice(0, 10);
@@ -54,16 +55,12 @@ const AddRenting = ({ refetchData }) => {
     }));
   };
 
-  const isEmpy = (e) => {
-    const { value } = e.target;
-    console.log(value);
-  };
-
   const handleClickAddNewRent = async (e) => {
     e.preventDefault();
     try {
       await axios.post(process.env.NEXT_PUBLIC_URL + "/rentings", inputs);
       console.log("New Rent Added!", inputs);
+      toast("New Rent Added");
       // refetch data to update the tables
       refetchData();
     } catch (error) {
