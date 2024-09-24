@@ -9,15 +9,14 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "./ui/card";
+} from "../ui/card";
 import axios from "axios";
-import { Loader2 } from "lucide-react";
 import { Separator } from "@radix-ui/react-dropdown-menu";
 import { toast } from "sonner";
 
 const AddRenting = ({ refetchData }) => {
   const today = new Date().toJSON().slice(0, 10);
-  const [deleting, setDeleting] = React.useState(true);
+
   const [inputs, setInputs] = React.useState({
     name: "",
     nic: "",
@@ -30,7 +29,6 @@ const AddRenting = ({ refetchData }) => {
     returnDate: "",
     price: 0.0,
   });
-  console.log(inputs);
 
   const clearInputs = () => {
     setInputs({
@@ -211,19 +209,6 @@ const AddRenting = ({ refetchData }) => {
               >
                 Clear
               </Button>
-
-              <Separator orientation="vertical" color="black" />
-
-              <Button variant="destructive">
-                {deleting ? (
-                  ""
-                ) : (
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                )}
-
-                {deleting ? "Delete" : "Deleting..."}
-              </Button>
-              <Button>Edit</Button>
             </div>
           </form>
         </CardContent>

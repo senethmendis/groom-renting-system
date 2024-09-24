@@ -1,4 +1,4 @@
-import Countings from "@/components/Countings";
+import Countings from "@/components/dashboard/Countings";
 
 export default function Home() {
   return (
