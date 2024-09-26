@@ -15,30 +15,16 @@ import {
 
 const AddNewProducts = () => {
   const [inputs, setInputs] = React.useState({
-    name: "",
-    nic: "",
-    number: "",
-    address: "",
-    productName: "",
-    productCode: "",
+    product_name: "",
+    product_code: "",
     notes: "",
-    rentedDate: "",
-    returnDate: "",
-    price: 0.0,
   });
 
   const clearInputs = () => {
     setInputs({
-      name: "",
-      nic: "",
-      number: 0,
-      address: "",
-      productName: "",
-      productCode: "",
+      product_name: "",
+      product_code: "",
       notes: "",
-      rentedDate: "",
-      returnDate: "",
-      price: 0.0,
     });
   };
 
@@ -81,7 +67,7 @@ const AddNewProducts = () => {
                   id="product_name"
                   placeholder="Black Coart"
                   required
-                  name="productName"
+                  name="product_name"
                   type="text"
                   onChange={handleInputChanges}
                 />

@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
   const query =
-    "INSERT INTO `rentings` (`customer_name`, `customer_number`, `customer_nic`, `rented_date`, `return_date`, `product_name`, `product_code`, `note`,`renting_price`,`customer_address`) VALUES (?)";
+    "INSERT INTO rentings (`customer_name`, `customer_number`, `customer_nic`, `rented_date`, `return_date`, `product_name`, `product_code`, `note`,`renting_price`,`customer_address`) VALUES (?)";
   const values = [
     req.body.name,
     req.body.number,
