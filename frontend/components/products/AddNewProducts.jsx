@@ -4,7 +4,6 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-
 import {
   Card,
   CardContent,
@@ -12,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import axios from "axios";
 
 const AddNewProducts = () => {
   const [inputs, setInputs] = React.useState({
@@ -36,14 +36,22 @@ const AddNewProducts = () => {
     }));
   };
 
-  const handleClickAddNewRent = async (e) => {
+  const handleClickAddNewProduct = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(process.env.NEXT_PUBLIC_URL + "/products", inputs);
-      console.log("New Rent Added!", inputs);
-      toast("New Rent Added");
-      // refetch data to update the tables
-      // refetchData();
+      if (
+        inputs.notes == "" ||
+        inputs.product_code == "" ||
+        inputs.product_name == ""
+      ) {
+        alert("Please fill all the fields");
+      } else {
+        await axios.post(process.env.NEXT_PUBLIC_URL + "/products", inputs);
+        console.log("New Rent Added!");
+        toast("New Rent Added");
+        // refetch data to update the tables
+        // refetchData();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -76,7 +84,7 @@ const AddNewProducts = () => {
               <div className="grid gap-2">
                 <Label htmlFor="product_code">Product code</Label>
                 <Input
-                  name="productCode"
+                  name="product_code"
                   id="product_code"
                   type="text"
                   required
@@ -101,7 +109,7 @@ const AddNewProducts = () => {
               type="submit"
               className="w-full"
               onClick={(e) => {
-                handleClickAddNewRent(e);
+                handleClickAddNewProduct(e);
               }}
             >
               Add New Product

@@ -37,7 +37,7 @@ router.delete("/:id", (req, res) => {
 router.post("/", (req, res) => {
   try {
     const query =
-      "INSERT INTO products (`product_id`, `product_name`, `product_code`, `note`) VALUES (?)";
+      "INSERT INTO products (`product_name`, `product_code`, `note`) VALUES (?)";
     const values = [
       req.body.product_name,
       req.body.product_code,

@@ -17,8 +17,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
 import axios from "axios";
+import { Button } from "../ui/button";
+import { Trash2 } from "lucide-react";
 
 const ProductTable = () => {
   const [products, setProducts] = React.useState([]);
@@ -26,7 +27,16 @@ const ProductTable = () => {
     try {
       const res = await axios.get(process.env.NEXT_PUBLIC_URL + "/products");
       setProducts(res.data);
-      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleDelteteProduct = async (id) => {
+    try {
+      await axios.delete(process.env.NEXT_PUBLIC_URL + `/products/${id}`);
+      console.log("Product Delete!");
+      fetchProductsData();
     } catch (error) {
       console.log(error);
     }
@@ -51,10 +61,9 @@ const ProductTable = () => {
                 <TableHead className="hidden sm:table-cell">
                   Product Name
                 </TableHead>
-                <TableHead className="hidden sm:table-cell">
-                  Product Code
-                </TableHead>
+                <TableHead className="table-cell">Product Code</TableHead>
                 <TableHead className="hidden md:table-cell">Note</TableHead>
+                <TableHead className="hidden md:table-cell">Action</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -67,11 +76,19 @@ const ProductTable = () => {
                       {prod.product_name}
                     </Badge>
                   </TableCell>
-                  <TableCell className="hidden md:table-cell">
+                  <TableCell className="table-cell">
                     {prod.product_code}
                   </TableCell>
-                  <TableCell className="hidden md:table-cell">
+                  <TableCell className=" md:table-cell flex flex-row items-center justify-between gap-6">
                     {prod.note}
+                  </TableCell>
+                  <TableCell className=" md:table-cell flex flex-row items-center justify-between gap-6">
+                    <Button
+                      variant="outline"
+                      onClick={() => handleDelteteProduct(prod.product_id)}
+                    >
+                      <Trash2 size={15} color="red" />
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}
