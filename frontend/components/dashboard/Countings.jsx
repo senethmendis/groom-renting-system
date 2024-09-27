@@ -28,7 +28,7 @@ const Countings = () => {
   }, []);
 
   return (
-    <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
+    <>
       <Card x-chunk="dashboard-05-chunk-1">
         <CardHeader className="pb-2">
           <CardDescription>Rentings</CardDescription>
@@ -67,7 +67,7 @@ const Countings = () => {
           />
         </CardFooter>
       </Card>
-    </div>
+    </>
   );
 };
 

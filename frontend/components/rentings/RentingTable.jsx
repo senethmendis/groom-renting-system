@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -27,12 +27,25 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Check, Clock8, SquareChartGantt, SquareX } from "lucide-react";
+import { Check, Clock8, SquareChartGantt, SquareX, Trash2 } from "lucide-react";
 import PopUpOptions from "./PopUpOptions";
+import { Button } from "../ui/button";
+import axios from "axios";
+import { toast } from "react-toastify";
 
-export const RentingTable = ({ renting }) => {
+export const RentingTable = ({ renting, refetchData }) => {
+  const handleDelteteRent = async (id) => {
+    await axios.delete(process.env.NEXT_PUBLIC_URL + `/rentings/${id}`);
+    toast("Rent Deleted!");
+    refetchData();
+  };
+
+  useEffect(() => {
+    refetchData();
+  }, []);
+
   return (
-    <Card x-chunk="dashboard-05-chunk-3" className="col-span-1 md:col-span-3">
+    <Card x-chunk="dashboard-05-chunk-3">
       <CardHeader className="px-7">
         <CardTitle>Rentings</CardTitle>
         <CardDescription>Rented orders from your store.</CardDescription>
@@ -57,6 +70,7 @@ export const RentingTable = ({ renting }) => {
                     Rent Code
                   </TableHead>
                   <TableHead className="text-right">Amount</TableHead>
+                  <TableHead className="text-right">Action</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -64,24 +78,6 @@ export const RentingTable = ({ renting }) => {
                   <TableRow key={rent.renting_id} className="bg-accent">
                     <TableCell>
                       <div className="flex gap-4">
-                        <AlertDialog>
-                          <AlertDialogTrigger>
-                            <SquareChartGantt color="grey" size={18} />
-                          </AlertDialogTrigger>
-                          <AlertDialogContent>
-                            <AlertDialogHeader>
-                              <AlertDialogTitle>
-                                Edit Details of the Rentings
-                              </AlertDialogTitle>
-                              <AlertDialogDescription>
-                                <PopUpOptions rent={rent} />
-                              </AlertDialogDescription>
-                            </AlertDialogHeader>
-                            <AlertDialogFooter>
-                              <AlertDialogCancel>Cancel</AlertDialogCancel>
-                            </AlertDialogFooter>
-                          </AlertDialogContent>
-                        </AlertDialog>
                         <div>
                           <div className="font-medium flex gap-2 items-center">
                             {rent.customer_name}
@@ -117,6 +113,14 @@ export const RentingTable = ({ renting }) => {
                     </TableCell>
                     <TableCell className="text-right">
                       {rent.renting_price} Rs
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <Button
+                        variant="outline"
+                        onClick={() => handleDelteteRent(rent.renting_id)}
+                      >
+                        <Trash2 size={15} color="red" />
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}

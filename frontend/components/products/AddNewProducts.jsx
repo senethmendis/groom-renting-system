@@ -12,6 +12,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 const AddNewProducts = () => {
   const [inputs, setInputs] = React.useState({
@@ -44,11 +45,14 @@ const AddNewProducts = () => {
         inputs.product_code == "" ||
         inputs.product_name == ""
       ) {
-        alert("Please fill all the fields");
+        toast("Fill the fields", {
+          theme: "dark",
+        });
       } else {
         await axios.post(process.env.NEXT_PUBLIC_URL + "/products", inputs);
         console.log("New Rent Added!");
         toast("New Rent Added");
+
         // refetch data to update the tables
         // refetchData();
       }
@@ -124,6 +128,12 @@ const AddNewProducts = () => {
           </div>
         </form>
       </CardContent>
+      <ToastContainer
+        theme="dark"
+        hideProgressBar
+        position="bottom-right"
+        autoClose={2000}
+      />
     </Card>
   );
 };

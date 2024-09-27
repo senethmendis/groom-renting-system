@@ -11,7 +11,6 @@ import {
   CardTitle,
 } from "../ui/card";
 import axios from "axios";
-import { Separator } from "@radix-ui/react-dropdown-menu";
 import { toast } from "sonner";
 
 const AddRenting = ({ refetchData }) => {
@@ -56,11 +55,24 @@ const AddRenting = ({ refetchData }) => {
   const handleClickAddNewRent = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(process.env.NEXT_PUBLIC_URL + "/rentings", inputs);
-      console.log("New Rent Added!", inputs);
-      toast("New Rent Added");
-      // refetch data to update the tables
-      refetchData();
+      if (
+        name == "" ||
+        nic == "" ||
+        number == 0 ||
+        address == "" ||
+        productName == "" ||
+        productCode == "" ||
+        notes == "" ||
+        price == 0.0
+      ) {
+        toast("Fill the Fileds");
+      } else {
+        await axios.post(process.env.NEXT_PUBLIC_URL + "/rentings", inputs);
+        console.log("New Rent Added!", inputs);
+        toast("New Rent Added");
+        // refetch data to update the tables
+        refetchData();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -68,7 +80,7 @@ const AddRenting = ({ refetchData }) => {
 
   return (
     <>
-      <Card className="max-w-full col-span-1 md:col-span-2">
+      <Card>
         <CardHeader>
           <CardTitle className="text-xl">Add New Rent</CardTitle>
 

@@ -32,7 +32,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Toaster } from "@/components/ui/toaster";
+import "react-toastify/dist/ReactToastify.css";
 
 export const metadata = {
   title: "Grooming",
@@ -217,7 +217,6 @@ export default function RootLayout({ children }) {
               </DropdownMenu>
             </header>
             <main className="p-4">{children}</main>
-            <Toaster />
           </div>
         </div>
       </body>
