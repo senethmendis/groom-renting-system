@@ -8,3 +8,5 @@ GET http://localhost:4000/rentings/count
 
 ###
 GET http://localhost:4000/dashboard
+###
+GET http://localhost:4000/dashboard/rentprice

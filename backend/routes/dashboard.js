@@ -40,4 +40,28 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get("/rentprice", (req, res) => {
+  const rentingIncome = "SELECT SUM(renting_price) FROM rentings";
+
+  const promise1 = new Promise((resolve, reject) => {
+    db.query(rentingIncome, (err, data) => {
+      if (err) {
+        reject(err);
+      }
+      resolve(data[0]["SUM(renting_price)"]);
+    });
+  });
+
+  //promis 1 get renting price count
+  Promise.all([promise1])
+    .then((results) => {
+      res.json({
+        rentingsIncome: results[0],
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({ message: "Error executiong ", errors: err });
+    });
+});
+
 module.exports = router;
