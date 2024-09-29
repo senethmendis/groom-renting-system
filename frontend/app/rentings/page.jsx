@@ -21,9 +21,9 @@ const Renting = () => {
     getRentingData();
   }, []);
   return (
-    <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div className="w-full grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
       {/* left side adding renting details */}
-      <div className="col-span-1">
+      <div className="col-span-1 md:col-span-2">
         <AddRenting refetchData={getRentingData} />
       </div>
 

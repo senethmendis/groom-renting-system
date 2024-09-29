@@ -16,6 +16,22 @@ router.get("/", (req, res) => {
   }
 });
 
+router.get("/:id", (req, res) => {
+  try {
+    const id = req.params.id;
+    const query = "SELECT * FROM products WHERE product_id = ?";
+
+    db.query(query, [id], (err, data) => {
+      if (err) throw err;
+      // console.table(data);
+      return res.json(data);
+    });
+  } catch (error) {
+    console.error("Fetching prodcut data failed!", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 router.delete("/:id", (req, res) => {
   try {
     const id = req.params.id;

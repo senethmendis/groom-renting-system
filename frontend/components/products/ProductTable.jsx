@@ -19,7 +19,8 @@ import {
 } from "@/components/ui/table";
 import axios from "axios";
 import { Button } from "../ui/button";
-import { Trash2 } from "lucide-react";
+import { Pencil, Trash2 } from "lucide-react";
+import Link from "next/link";
 
 const ProductTable = () => {
   const [products, setProducts] = React.useState([]);
@@ -68,7 +69,7 @@ const ProductTable = () => {
             </TableHeader>
             <TableBody>
               {products.map((prod) => (
-                <TableRow key={prod.product_id} className="bg-accent">
+                <TableRow className="bg-accent" key={prod.product_id}>
                   <TableCell>{prod.product_id}</TableCell>
 
                   <TableCell className="hidden sm:table-cell">
@@ -89,6 +90,12 @@ const ProductTable = () => {
                     >
                       <Trash2 size={15} color="red" />
                     </Button>
+
+                    <Link href={`/products/${prod.product_id}`}>
+                      <Button variant="outline">
+                        <Pencil size={15} color="black" />
+                      </Button>
+                    </Link>
                   </TableCell>
                 </TableRow>
               ))}

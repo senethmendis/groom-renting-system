@@ -16,12 +16,32 @@ import {
 } from "@/components/ui/chart";
 export const description = "A simple pie chart";
 import { chartConfig } from "../../utility/chart";
+import React, { useEffect } from "react";
+import axios from "axios";
 
 const ChartAndStates = () => {
-  const chartData = [
-    { browser: "Renting", visitors: 10, fill: "var(--color-chrome)" },
-    { browser: "Products", visitors: 5, fill: "var(--color-safari)" },
-  ];
+  const [chartData, setChartData] = React.useState([]);
+
+  const getSystemInfo = async () => {
+    const res = await axios.get(process.env.NEXT_PUBLIC_URL + "/system");
+    const data = res.data;
+    setChartData([
+      {
+        filedName: "Targeted",
+        visitors: data.target_income,
+        fill: "var(--color-chrome)",
+      },
+      {
+        filedName: "Current",
+        visitors: data.monthly_income,
+        fill: "var(--color-safari)",
+      },
+    ]);
+  };
+
+  useEffect(() => {
+    getSystemInfo();
+  }, []);
 
   return (
     <Card className="grid">
@@ -40,7 +60,7 @@ const ChartAndStates = () => {
               content={<ChartTooltipContent />}
               hideLabel
             />
-            <Pie data={chartData} dataKey="visitors" nameKey="browser" />
+            <Pie data={chartData} dataKey="visitors" nameKey="filedName" />
           </PieChart>
         </ChartContainer>
       </CardContent>

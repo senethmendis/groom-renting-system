@@ -12,7 +12,9 @@ const port = process.env.SERVERPORT;
 const products = require("./routes/products");
 const rentings = require("./routes/rentings");
 const dashboard = require("./routes/dashboard");
+const system = require("./routes/system");
 
+app.use("/system", system);
 app.use("/products", products);
 app.use("/rentings", rentings);
 app.use("/dashboard", dashboard);
