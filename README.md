@@ -1,6 +1,7 @@
 # FullStack Renting System Node.js & NEXT.js
 ![dp](https://github.com/senethmendis/groom-renting-system/blob/main/Docs/Screenshot%202024-09-30%20151047.png)
 
+![dp2](https://github.com/senethmendis/groom-renting-system/blob/main/Docs/Screenshot%202024-09-30%20150945.png)
 ### Built With
 
  frameworks/libraries used for theproject..
