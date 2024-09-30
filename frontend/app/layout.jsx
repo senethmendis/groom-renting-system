@@ -95,20 +95,6 @@ export default function RootLayout({ children }) {
                   <TooltipContent side="right">Products</TooltipContent>
                 </Tooltip>
               </TooltipProvider>
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Link
-                      href="/customers"
-                      className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                    >
-                      <Users2 className="h-5 w-5" />
-                      <span className="sr-only">Customers</span>
-                    </Link>
-                  </TooltipTrigger>
-                  <TooltipContent side="right">Customers</TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
             </nav>
             <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
               <TooltipProvider>
@@ -166,13 +152,7 @@ export default function RootLayout({ children }) {
                       <Package className="h-5 w-5" />
                       Products
                     </Link>
-                    <Link
-                      href="/customers"
-                      className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                    >
-                      <Users2 className="h-5 w-5" />
-                      Customers
-                    </Link>
+
                     <Link
                       href="#"
                       className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
@@ -208,9 +188,6 @@ export default function RootLayout({ children }) {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>Settings</DropdownMenuItem>
-                  <DropdownMenuItem>Support</DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>Logout</DropdownMenuItem>
                 </DropdownMenuContent>
