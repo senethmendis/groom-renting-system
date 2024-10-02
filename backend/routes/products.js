@@ -71,4 +71,38 @@ router.post("/", (req, res) => {
   }
 });
 
+/////////////////////////////////////////////////
+
+// app.put("/products/:id", (req, res) => {
+//   const productId = req.params.id;
+//   const query =
+//     "UPDATE products SET product_name = ?, category = ?, price = ?, unit = ?,stock_quantity= ?,image_url= ? WHERE product_id = ?";
+//   const values = [
+//     req.body.product_name,
+//     req.body.category,
+//     req.body.price,
+//     req.body.unit,
+//     req.body.stock_quantity,
+//     req.body.image_url,
+//   ];
+//   db.query(query, [...values, productId], (err, data) => {
+//     if (err) return err;
+//     return res.json("Product Updated!");
+//   });
+// });
+
+/////////////////////////////////////////////////
+
+router.put("/", (req, res) => {
+  const prductId = req.params.id;
+  const query =
+    "UPDATE products SET product_name = ? , product_code = ? , note = ?   WHERE product_id = ?;";
+  const values = [req.body.product_name, req.body.product_code, req.body.note];
+
+  db.query(query, [...values, prductId], (err, data) => {
+    if (err) return err;
+    return res.json("Product Updated!");
+  });
+});
+
 module.exports = router;

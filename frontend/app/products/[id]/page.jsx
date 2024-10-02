@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 export const description =
   "A product edit page. The product edit page has a form to edit the product details, stock, product category, product status, and product images. The product edit page has a sidebar navigation and a main content area. The main content area has a form to edit the product details, stock, product category, product status, and product images. The sidebar navigation has links to product details, stock, product category, product status, and product images.";
@@ -24,12 +25,24 @@ export const description =
 const page = ({ params }) => {
   const [data, setData] = React.useState([]);
 
+  console.log(data);
+
   const getProductDetails = async () => {
     const res = await axios.get(
       process.env.NEXT_PUBLIC_URL + `/products/${params.id}`
     );
 
     setData(res.data);
+  };
+
+  const updateProductData = async (e, id) => {
+    try {
+      await axios.put(NEXT_PUBLIC_URL + `/products/${id}`, data);
+      toast("Product Updated!");
+      getProductDetails();
+    } catch (error) {
+      toast("Error updating product");
+    }
   };
 
   useEffect(() => {
@@ -59,7 +72,12 @@ const page = ({ params }) => {
               <Button variant="outline" size="sm">
                 Discard
               </Button>
-              <Button size="sm">Save Product</Button>
+              <Button
+                size="sm"
+                onClick={(e) => updateProductData(e, data.product_id)}
+              >
+                Save Product
+              </Button>
             </div>
           </div>
           <div className="grid gap-4 sm:grid-cols-1  md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
@@ -74,6 +92,7 @@ const page = ({ params }) => {
                       <Label htmlFor="name">Name</Label>
                       <Input
                         id="name"
+                        name="product_name"
                         type="text"
                         className="w-full"
                         defaultValue="Gamer Gear Pro Controller"
@@ -84,6 +103,7 @@ const page = ({ params }) => {
                       <Input
                         id="name"
                         type="text"
+                        name="product_code"
                         className="w-full"
                         defaultValue={product.product_code}
                         disabled
@@ -95,6 +115,7 @@ const page = ({ params }) => {
                         id="description"
                         defaultValue={product.note}
                         className="min-h-32"
+                        name="note"
                       />
                     </div>
                   </div>
